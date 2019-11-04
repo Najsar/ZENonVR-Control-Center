@@ -113,10 +113,25 @@
   <!-- Page level custom scripts -->
   <script>
     $(document).ready(function() {
-      //$('#dataTable').DataTable();
-      $('#datetimepicker12').datepicker({
-          
+      $('#dataTable').DataTable();
+      $.fn.datepicker.dates['pl'] = {
+          days: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"],
+          daysShort: ["Niedz", "Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Niedz"],
+          daysMin: ["Nd", "Pn", "Wt", "Śr", "Czw", "Pt", "Sb", "Nd"],
+          months: ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"],
+          monthsShort: ["STY", "LUT", "MAR", "KWI", "MAJ", "CZE", "LIP", "SIE", "WRZ", "PAŹ", "LIS", "GRU"]
+      };
+      $('#date').datepicker({
+        language: 'pl',
+        format: "yyyy-mm-01",
+        //viewMode: "months", 
+        minViewMode: "months",
+        defaultDate: new Date()
          
+      })
+      .on('changeDate', function(ev){
+        $(location).attr('href','?date='+ev.format());
+        //alert(ev.format());
       });
     });
   </script>

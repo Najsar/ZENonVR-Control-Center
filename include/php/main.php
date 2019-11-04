@@ -1,6 +1,6 @@
 <?php
     function sql_main($query_text) {
-        $conn = new mysqli('localhost', 'root', '', 'zen_cmd');
+        $conn = new mysqli('localhost', 'zen_cmd', 'Qwerty1@3', 'zen_cmd');
         $conn->query("SET NAMES 'utf8'");
             if(!$conn->query($query_text) ) {
                 $status = '0';
