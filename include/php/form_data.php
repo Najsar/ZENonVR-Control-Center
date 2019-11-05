@@ -89,7 +89,13 @@ switch($_GET['p']) {
         }
     break;
     case "day_payment":
-        $query = sql_query("SELECT id, category, type, payment, main_price, price, paid_price, exchange, TIME(time) as time FROM sessions WHERE DATE(time) = DATE(NOW()) ORDER BY id DESC");
+        if(!isset($_GET['date'])) {
+            $date = date('Y:m:d');
+        }
+        else {
+            $date = $_GET['date'];
+        }
+        $query = sql_query("SELECT id, category, type, payment, main_price, price, paid_price, exchange, TIME(time) as time FROM sessions WHERE DATE(time) = DATE('".$date."') ORDER BY id DESC");
         $data = $query['data']->fetch_all();
         //print_r( $data );
         $json['data'] = $data;

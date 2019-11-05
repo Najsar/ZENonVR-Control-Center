@@ -68,6 +68,12 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="day_report.php">
+          <i class="fas fa-fw fa-chart-line"></i>
+          <span>Statystyki dzienne</span></a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#edit" aria-expanded="true">
           <i class="fas fa-fw fa-edit"></i>
           <span>Edycja</span>
