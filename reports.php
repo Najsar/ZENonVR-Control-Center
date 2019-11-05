@@ -98,6 +98,8 @@
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -110,6 +112,31 @@
   <!-- Page level custom scripts -->
   <script>
     $(document).ready(function() {
+      var d = new Date();
+      var currMonth = d.getMonth();
+      var currYear = d.getFullYear();
+      var startDate = new Date(currYear, currMonth, 1);
+
+      $.fn.datepicker.dates['pl'] = {
+          days: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"],
+          daysShort: ["Niedz", "Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Niedz"],
+          daysMin: ["Nd", "Pn", "Wt", "Śr", "Czw", "Pt", "Sb", "Nd"],
+          months: ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"],
+          monthsShort: ["STY", "LUT", "MAR", "KWI", "MAJ", "CZE", "LIP", "SIE", "WRZ", "PAŹ", "LIS", "GRU"]
+      };
+      $('#date').datepicker({
+        language: 'pl',
+        format: "yyyy-mm-01",
+        minViewMode: "months"
+      })
+      .on('changeDate', function(ev){
+        $("#dataTable").DataTable().destroy()
+        $('#dataTable').DataTable({
+          ajax: "include/php/form_data.php?p=day_reports&date="+ev.format(),
+          order: [[ 0, "desc" ]]
+        });
+      });
+      $('#date').datepicker('update', startDate);
       $('#dataTable').DataTable({
         ajax: "include/php/form_data.php?p=day_reports",
         order: [[ 0, "desc" ]]

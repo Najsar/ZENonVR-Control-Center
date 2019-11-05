@@ -5,8 +5,8 @@
                 <div class="card-header">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <h5 class="m-0 font-weight-bold text-primary">Statystyki</h6>
-                            <h6 class="m-0 font-weight-bold text-primary">Aktualnie wyświetlane są dane z danego miesiąca, zakres ten będzie można zmienić poniżej</h6>
+                            <h5 class="m-0 font-weight-bold text-primary">Statystyki</h5>
+                            <h6 class="m-0 font-weight-bold text-primary">Aktualnie wyświetlane są dane z danego miesiąca, zakres ten można zmienić poniżej</h6>
                         </div>
                     </div>
                 </div>

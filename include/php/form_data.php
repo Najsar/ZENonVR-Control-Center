@@ -137,7 +137,13 @@ switch($_GET['p']) {
         }
     break;
     case "day_reports":
-        $query = sql_query("SELECT DATE(date), start_cash, cash, card, expense, pcstore, grupon, s_prezenty, partners, exchange, end_balance, profit, bonus FROM reports WHERE MONTH(date) = MONTH(NOW()) ORDER BY id DESC");
+        if(!isset($_GET['date'])) {
+            $date = date('Y:m:d');
+        }
+        else {
+            $date = $_GET['date'];
+        }
+        $query = sql_query("SELECT DATE(date), start_cash, cash, card, expense, pcstore, grupon, s_prezenty, partners, exchange, end_balance, profit, bonus FROM reports WHERE MONTH(date) = MONTH('".$date."') ORDER BY id DESC");
         $data = $query['data']->fetch_all();
         //print_r( $data );
         $json['data'] = $data;

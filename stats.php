@@ -113,6 +113,26 @@
   <!-- Page level custom scripts -->
   <script>
     $(document).ready(function() {
+      $.urlParam = function(name){
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if(results == null) {
+          return 0;
+        }
+        else {
+          return results[1] || 0;
+        }
+      }
+      if($.urlParam('date') == 0) {
+        var d = new Date();
+        var currMonth = d.getMonth();
+        var currYear = d.getFullYear();
+        var startDate = new Date(currYear, currMonth, 1);
+      }
+      else {
+        var startDate = new Date($.urlParam('date'));
+      }
+      
+
       $('#dataTable').DataTable();
       $.fn.datepicker.dates['pl'] = {
           days: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"],
@@ -124,15 +144,13 @@
       $('#date').datepicker({
         language: 'pl',
         format: "yyyy-mm-01",
-        //viewMode: "months", 
-        minViewMode: "months",
-        defaultDate: new Date()
-         
+        minViewMode: "months"
       })
       .on('changeDate', function(ev){
         $(location).attr('href','?date='+ev.format());
         //alert(ev.format());
       });
+      $('#date').datepicker('update', startDate);
     });
   </script>
 
