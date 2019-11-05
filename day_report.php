@@ -128,7 +128,7 @@
       $('#date').datepicker({
         language: 'pl',
         format: "yyyy-mm-dd",
-        minViewMode: "0"
+        weekStart: 1
       })
       .on('changeDate', function(ev){
         $("#dataTable").DataTable().destroy();

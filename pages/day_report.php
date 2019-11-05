@@ -35,7 +35,7 @@
                 <div class="card-header">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <h5 class="m-0 font-weight-bold text-primary" style="text-align:center">Wybierz miesiąc</h6>
+                            <h5 class="m-0 font-weight-bold text-primary" style="text-align:center">Wybierz datę</h6>
                         </div>
                     </div>
                 </div>
