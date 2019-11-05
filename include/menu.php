@@ -82,8 +82,8 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Edycja:</h6>
             <a class="collapse-item" href="edit_products.php">Produkty</a>
-            <a class="collapse-item" href="edit_reports.php">Korekta rozliczeń</a>
-            <a class="collapse-item" href="adv_stats.php">Zaawansowane statystyki</a>
+            <!--<a class="collapse-item" href="edit_reports.php">Korekta rozliczeń</a>-->
+            <!--<a class="collapse-item" href="adv_stats.php">Zaawansowane statystyki</a>-->
           </div>
         </div>
       </li>

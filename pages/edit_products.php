@@ -32,38 +32,6 @@
                                 <th>Zarządzaj</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Piwo</td>
-                                <td>Napój</td>
-                                <td>30</td>
-                                <td>12</td>
-                                <td>
-                                    <a href="#" class="btn btn-info btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-edit"></i>
-                                        </span>
-                                        <span class="text">Edytuj</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Chipsy</td>
-                                <td>Jedzenie</td>
-                                <td>50</td>
-                                <td>15</td>
-                                <td>
-                                    <a href="#" class="btn btn-info btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-edit"></i>
-                                        </span>
-                                        <span class="text">Edytuj</span>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
                     </table>
                 </div>
                 

@@ -111,7 +111,9 @@
   <script>
     $(document).ready(function() {
       $('#dataTable').DataTable({
-        searching: false
+        searching: false,
+        ajax: "include/php/form_data.php?p=product_list",
+        order: [[ 0, "asc" ]]
       });
     });
   </script>
