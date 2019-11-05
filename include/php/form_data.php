@@ -130,7 +130,6 @@ switch($_GET['p']) {
             else $data[$i][4] = $data[$i][5];
             $data[$i][5] = "<a href='#' class='btn btn-info btn-icon-split'><span class='icon text-white-50'><i class='fas fa-edit'></i></span><span class='text'>Edytuj</span></a>";
         }
-        //print_r( $data );
         $json['data'] = $data;
         echo json_encode( $json ) ;
     break;
