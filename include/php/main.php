@@ -25,7 +25,7 @@
             $conn->close();
     }
     function sql_query($query_text) {
-        $conn = new mysqli('localhost', 'root', '', 'zen_cmd');
+        $conn = new mysqli('localhost', 'zen_cmd', 'Qwerty1@3', 'zen_cmd');
         $conn->query("SET NAMES 'utf8'");
         $query = $conn->query($query_text);
             if( !$query ) {
