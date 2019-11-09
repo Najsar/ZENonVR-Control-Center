@@ -20,7 +20,14 @@ switch($_GET['p']) {
     case "new_payment":
         $data = $_POST['data'];
         $date = date('Y:m:d H:i:s');
-        $query = sql_query("INSERT INTO sessions VALUES('','Przychód', '".$data[1]."', '".$data[3]."', '".$data[5]."', '".$data[2]."', '".$data[6]."', '".$data[7]."','".$data[8]."', '".$date."')");
+        if($data[9] == 1) {
+            $query = sql_query("INSERT INTO sessions VALUES('','Przychód', '".$data[1]."', '".$data[3]."', '".$data[5]."', '".$data[2]."', '".$data[6]."', '".$data[7]."','".$data[8]."', '".$date."')");
+        }
+        else {
+            for($i=0; $i<$data[9];$i++) {
+                $query = sql_query("INSERT INTO sessions VALUES('','Przychód', '".$data[1]."', '".$data[3]."', '".$data[5]."', '".$data[2]."', '".($data[6]/$data[9])."', '".($data[7]/$data[9])."','".($data[8]/$data[9])."', '".$date."')");
+            }
+        }
         if(!$query['status']) {
             $json['status'] = "0";
             $json['data'] = "Data not saved";

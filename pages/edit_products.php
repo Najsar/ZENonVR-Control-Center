@@ -1,8 +1,6 @@
 <div class="container-fluid">
-
-    
-        <div class="row">
-            <div class="col-xl-12 col-lg-8">
+    <div class="row">
+        <div class="col-xl-12 col-lg-8">
             <div class="card shadow">
                 <div class="card-header">
                     <div class="row no-gutters align-items-center">
@@ -20,26 +18,23 @@
                     </div>
                 </div>
                 <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nazwa produktu</th>
-                                <th>Kategoria</th>
-                                <th>Cena ( zł )</th>
-                                <th>Stan (szt )</th>
-                                <th>Zarządzaj</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Kategoria</th>
+                                    <th>Nazwa produktu</th>
+                                    <th>Cena ( zł )</th>
+                                    <th>Stan (szt )</th>
+                                    <th>Zarządzaj</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
-                
-                </div>
-            </div>
             </div>
         </div>
-
-
+    </div>
 </div>
 <!-- /.container-fluid -->

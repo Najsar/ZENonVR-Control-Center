@@ -80,25 +80,34 @@ function modal_sell_box()
                 if($('#return_input_div').val() != undefined) {
                     $('#return_input_div').remove();
                 }
-                var box_form = "<div class='form-group'  id='payment_metchod_list_div'><label>Sposób płatności</label><select class='form-control' id='payment_metchod_list_select'><option selected disabled>Wybierz sposób płatności</option>";
+                var box_form = "<div  id='payment_metchod_list_div'><div class='form-group'><label>Ilość</label><div class='input-group'><input type='number' class='form-control' id='value_input' placeholder='1'><div class='input-group-append'><span class='input-group-text'>szt</span></div></div></div>";
+                box_form += "<div class='form-group'><label>Sposób płatności</label><select class='form-control' id='payment_metchod_list_select'><option selected disabled>Wybierz sposób płatności</option>";
 
                 for (var i = 0; i < res2.length; i++) {
                 box_form += "<option value='"+res2[i][0]+"'>"+res2[i][1]+"</option>";
                 }
-                box_form += "</select></div>";
+                box_form += "</select></div></div>";
                 $('#sell_box_form').append(box_form);
                 $('#payment_metchod_list_select').change(function(){
                     if($('#return_input_div').val() != undefined) {
                         $('#return_input_div').remove();
                     }
                     //return_discount_input
-                    var return_input = Number($('#product_list_select').val());
+                    var return_input = Number($('#product_list_select').val())*Number($('#value_input').val());
                     var box_form = "<div id='return_input_div'><div class='form-group'><label>Rabat</label><div class='input-group'><input type='number' class='form-control' id='return_discount_input' placeholder='0'><div class='input-group-append'><span class='input-group-text'>%</span></div></div></div>";
                     box_form += "<div class='form-group'><label>Do zapłaty</label><div class='input-group'><input type='number' readonly class='form-control' value='"+return_input+"' id='return_to_buy'><div class='input-group-append'><span class='input-group-text'>zł</span></div></div></div>";
                     box_form += "<div class='form-group'><label>Zapłacono</label><div class='input-group'><input type='number' class='form-control' id='return_input' placeholder='0'><div class='input-group-append'><span class='input-group-text'>zł</span></div></div></div>";
                     box_form += "<div class='form-group'><label>Reszta</label><div class='input-group'><input type='number' readonly class='form-control' placeholder='0' id='return_exchange_input'><div class='input-group-append'><span class='input-group-text'>zł</span></div></div></div></div>";
                     $('#sell_box_form').append(box_form);
                     
+                    $('#value_input').keyup(function(){
+                        var return_input = Number($('#product_list_select').val())*Number($('#value_input').val());
+                        $('#return_to_buy').val(return_input);
+                    });
+                    $('#value_input').change(function(){
+                        var return_input = Number($('#product_list_select').val())*Number($('#value_input').val());
+                        $('#return_to_buy').val(return_input);
+                    });
                     if(Number($('#product_list_select').val()) == 0) {
                         $('#return_input').keyup(function(){
                             var return_to_buy = Number( $('#return_input').val() );
@@ -186,8 +195,9 @@ function send_newsell_modal()
     var data4 = $('#return_to_buy').val();
     var data5 = $('#return_input').val();
     var data6 = $('#return_exchange_input').val();
+    var data7 = $('#value_input').val();
 
-    var data = [data1, data1_1, data2, data2_1, data3, data3_1, data4, data5, data6];
+    var data = [data1, data1_1, data2, data2_1, data3, data3_1, data4, data5, data6, data7];
 
     if( hasEmptyElement(data) )
     {
