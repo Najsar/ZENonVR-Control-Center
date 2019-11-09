@@ -93,7 +93,13 @@ function modal_sell_box()
                         $('#return_input_div').remove();
                     }
                     //return_discount_input
-                    var return_input = Number($('#product_list_select').val())*Number($('#value_input').val());
+                    if($('#value_input').val() == 0) {
+                        var return_input = Number($('#product_list_select').val());
+                    }
+                    else {
+                        var return_input = Number($('#product_list_select').val())*Number($('#value_input').val());
+                    }
+                    
                     var box_form = "<div id='return_input_div'><div class='form-group'><label>Rabat</label><div class='input-group'><input type='number' class='form-control' id='return_discount_input' placeholder='0'><div class='input-group-append'><span class='input-group-text'>%</span></div></div></div>";
                     box_form += "<div class='form-group'><label>Do zapłaty</label><div class='input-group'><input type='number' readonly class='form-control' value='"+return_input+"' id='return_to_buy'><div class='input-group-append'><span class='input-group-text'>zł</span></div></div></div>";
                     box_form += "<div class='form-group'><label>Zapłacono</label><div class='input-group'><input type='number' class='form-control' id='return_input' placeholder='0'><div class='input-group-append'><span class='input-group-text'>zł</span></div></div></div>";
