@@ -221,6 +221,13 @@ function send_newsell_modal()
             //console.log("Response: " + res);
             refresh();
             $('#newSell').modal('hide');
+            $.notify({
+                // options
+                message: 'Produkt dodany do dzisiejszej spedaży' 
+            },{
+                // settings
+                type: 'success'
+            });
         });
     }
 }
@@ -248,6 +255,13 @@ function send_newExpense_modal()
             //console.log("Response: " + res);
             refresh();
             $('#newExpense').modal('hide');
+            $.notify({
+                // options
+                message: 'Produkt dodany do dzisiejszych wydatków' 
+            },{
+                // settings
+                type: 'success'
+            });
         });
     }
 }
@@ -271,6 +285,13 @@ function send_modal_day_report()
             console.log("Response: " + res + data);
             refresh();
             $('#dayReport').modal('hide');
+            $.notify({
+                // options
+                message: 'Raport został wykonany poprawnie' 
+            },{
+                // settings
+                type: 'success'
+            });
         });
     }
 }
