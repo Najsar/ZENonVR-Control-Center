@@ -99,6 +99,7 @@ function modal_sell_box()
                     else {
                         var return_input = Number($('#product_list_select').val())*Number($('#value_input').val());
                     }
+
                     
                     var box_form = "<div id='return_input_div'><div class='form-group'><label>Rabat</label><div class='input-group'><input type='number' class='form-control' id='return_discount_input' placeholder='0'><div class='input-group-append'><span class='input-group-text'>%</span></div></div></div>";
                     box_form += "<div class='form-group'><label>Do zapłaty</label><div class='input-group'><input type='number' readonly class='form-control' value='"+return_input+"' id='return_to_buy'><div class='input-group-append'><span class='input-group-text'>zł</span></div></div></div>";
@@ -106,6 +107,10 @@ function modal_sell_box()
                     box_form += "<div class='form-group'><label>Reszta</label><div class='input-group'><input type='number' readonly class='form-control' placeholder='0' id='return_exchange_input'><div class='input-group-append'><span class='input-group-text'>zł</span></div></div></div></div>";
                     $('#sell_box_form').append(box_form);
                     
+                    if(Number($('#payment_metchod_list_select').val()) != 2) {
+                        $('#return_input').val(return_input);
+                        $('#return_exchange_input').val(0);
+                    }
                     $('#value_input').keyup(function(){
                         var return_input = Number($('#product_list_select').val())*Number($('#value_input').val());
                         $('#return_to_buy').val(return_input);
@@ -201,7 +206,12 @@ function send_newsell_modal()
     var data4 = $('#return_to_buy').val();
     var data5 = $('#return_input').val();
     var data6 = $('#return_exchange_input').val();
-    var data7 = $('#value_input').val();
+    if($('#value_input').val() == 0) {
+        var data7 = 1;
+    }
+    else {
+        var data7 = $('#value_input').val();
+    }
 
     var data = [data1, data1_1, data2, data2_1, data3, data3_1, data4, data5, data6, data7];
 
