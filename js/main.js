@@ -1,5 +1,8 @@
 $(document).ready(function() {
-    var username;
+    $.getJSON( "version.json", function(data) {
+        console.log(data);
+        $("#version").html("Wersja interfejsu: " + data['interface-version'] + " Wersja silnika: " + data['engine-version'] + "");
+      })
     $.get('include/menu.html', function(data) {
         $("#main_menu").replaceWith(data);
         $("#accordionSidebar li a").click(function() {
