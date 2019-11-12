@@ -63,21 +63,18 @@ switch($_GET['p']) {
         }
         $query = sql_query("SELECT id, category, type, payment, main_price, price, paid_price, exchange, TIME(time) as time FROM sessions WHERE DATE(time) = DATE('".$date."') ORDER BY id DESC");
         $data = $query['data']->fetch_all();
-        //print_r( $data );
         $json['data'] = $data;
         echo json_encode( $json ) ;
     break;
     case "day_profit":
         $query = sql_query("SELECT SUM(price) AS suma FROM sessions WHERE sort = 'Przychód' AND DATE(time) = DATE(NOW()) ORDER BY id DESC");
         $data = $query['data']->fetch_all();
-        //print_r( $data );
         $json['data'] = $data;
         echo json_encode( $json ) ;
     break;
     case "month_profit":
         $query = sql_query("SELECT SUM(price) AS suma FROM sessions WHERE sort = 'Przychód' AND MONTH(time) = MONTH(NOW()) ORDER BY id DESC");
         $data = $query['data']->fetch_all();
-        //print_r( $data );
         $json['data'] = $data;
         echo json_encode( $json ) ;
     break;
@@ -89,7 +86,6 @@ switch($_GET['p']) {
     break;
     case "new_day_report":
         $end_bal = $_POST['data'];
-        //$end_bal = 1049;
         $sum = get_sum(date('Y:m:d H:i:s'));
         $sum['exchange'] = round( ($sum['start_cash']+$sum['cash']-$sum['expense'])-$end_bal, 2);
         $sum['bonus'] = round(($sum['profit']-$sum['partners'])*0.1, 2);
@@ -117,7 +113,6 @@ switch($_GET['p']) {
         }
         $query = sql_query("SELECT DATE(date), start_cash, cash, card, expense, pcstore, grupon, s_prezenty, partners, exchange, end_balance, profit, bonus FROM reports WHERE MONTH(date) = MONTH('".$date."') ORDER BY id DESC");
         $data = $query['data']->fetch_all();
-        //print_r( $data );
         $json['data'] = $data;
         echo json_encode( $json ) ;
     break;
@@ -139,6 +134,15 @@ switch($_GET['p']) {
         }
         $json['data'] = $data;
         echo json_encode( $json ) ;
+    break;
+    case "gen_stats":
+        if(isset($_GET['date'])) {
+            $date = $_GET['date'];
+        }
+        else {
+            $date = date('Y:m:d');
+        }
+        echo get_stats($date);
     break;
 }
 ?>
