@@ -42,13 +42,12 @@
             $conn->close();
     }
     function gen_pass($pass, $salt) {
-        $pass_hashed = hash('sha512', $pass);
-        $pass_hashed = hash('MD5', $pass_hashed.$salt);
+        $pass_hashed = hash('MD5', $pass.$salt);
         $pass_hashed = hash('sha256', $pass_hashed);
-        $pass_hashed = hash('sha512', $pass_hashed.$salt);
         $pass_hashed = hash('MD5', $pass_hashed);
         $pass_hashed = hash('sha256', $salt.$pass_hashed);
-        $pass_hashed = hash('SHA512', $pass_hashed);
+        $pass_hashed = hash('MD5', $pass.$pass_hashed);
+        $pass_hashed = hash('sha256', $pass_hashed);
         return $pass_hashed;
     }
     function gen($method, $size) {
@@ -84,7 +83,7 @@
     function login($user, $pass) {
         $user = htmlspecialchars($user);
         $pass = htmlspecialchars($pass);
-        if($user == '' || $user == null || $pass == '' || $pass = null) {
+        if($user == '' || $user == null || $pass == '' || $pass == null) {
             $return['status'] = 0;
             $return['data'] = "No data";
             return  $return;
@@ -95,7 +94,7 @@
             return  $return;
         }
         else {
-            $salt = sql_main("SELECT Salt FROM users WHERE Name = '".$user."'");
+            $salt = sql_main("SELECT Salt FROM users WHERE `Name` = '".$user."'");
             if($salt['status'] == 0) {
                 $return['status'] = 0;
                 $return['data'] = "User not exist";
@@ -103,10 +102,13 @@
             }
             else {
                 $pass_hashed = gen_pass($pass, $salt['data']['Salt']);
-                $user = sql_main("SELECT * FROM users WHERE Name = '".$user."' AND Pass = '".$pass_hashed."'");
+                $user = sql_main("SELECT * FROM users WHERE `Name` = '".$user."' AND `Pass` = '".$pass_hashed."'");
                 if($user['status'] == 0) {
                     $return['status'] = 0;
                     $return['data'] = "Pass not exist";
+                    //$return['pass'] = $pass;
+                    //$return['pass_hashed'] = $pass_hashed;
+                    //$return['salt'] = $salt['data']['Salt'];
                     return  $return;
                 }
                 else {

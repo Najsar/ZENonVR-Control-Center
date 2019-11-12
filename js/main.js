@@ -1,9 +1,19 @@
 $(document).ready(function() {
+    var username;
     $.get('include/menu.html', function(data) {
         $("#main_menu").replaceWith(data);
         $("#accordionSidebar li a").click(function() {
             $(this).parent().addClass('active');
         });
+    });
+    $.ajax({
+        url : "include/php/form_data.php?p=get_user_name",
+        dataType : "json"
+    })
+    .done(function(res) {
+        if(res['status'] == 0) {
+            window.location.href = 'login.html';
+        }
     });
     change_page();
 });
@@ -68,8 +78,8 @@ function change_page(page) {
                 .on('changeDate', function(ev){
                     $("#dataTable").DataTable().destroy()
                     $('#dataTable').DataTable({
-                    ajax: "include/php/form_data.php?p=day_reports&date="+ev.format(),
-                    order: [[ 0, "desc" ]]
+                        ajax: "include/php/form_data.php?p=day_reports&date="+ev.format(),
+                        order: [[ 0, "desc" ]]
                     });
                 });
                 $('#date').datepicker('update', startDate);
@@ -137,8 +147,8 @@ function change_page(page) {
                 .on('changeDate', function(ev){
                     $("#dataTable").DataTable().destroy();
                     $('#dataTable').DataTable({
-                    ajax: "include/php/form_data.php?p=day_payment&date="+ev.format(),
-                    order: [[ 0, "desc" ]]
+                        ajax: "include/php/form_data.php?p=day_payment&date="+ev.format(),
+                        order: [[ 0, "desc" ]]
                     });
                 });
                 $('#date').datepicker('update', startDate);
@@ -160,9 +170,17 @@ function change_page(page) {
             break;
     }
     $.get('include/top_menu.html', function( data ) {
-        data = data.replace("%%PAGE%%", page_name);
-        data = data.replace("%%USER%%", 'User');
-        $('#top_menu').html(data);
+        $.ajax({
+            url : "include/php/form_data.php?p=get_user_name",
+            dataType : "json"
+        })
+        .done(function(res) {
+            if(res['status'] != 0) {
+                data = data.replace("%%PAGE%%", page_name);
+                data = data.replace("%%USER%%", res['data']['Name']);
+                $('#top_menu').html(data);
+            }
+        });
     });
     return false;
 }

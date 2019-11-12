@@ -46,32 +46,15 @@
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" name="password" placeholder="Podaj hasło">
                     </div>
-                    <a href="#" class="btn btn-primary btn-user btn-block" onClick="$('#login_form').submit(); return false;">
+                    <a href="#" class="btn btn-primary btn-user btn-block" onClick="login();">
                       Zaloguj się
                     </a>
                   </form>
                   <hr>
                   <div class="text-center">
-                    Jeśli nie pamiętasz hasła,<br> skontaktuj się z administratorem
+                      Jeśli nie pamiętasz hasła,<br> skontaktuj się z administratorem
                     <br><br>
-                    <?php
-                      session_start();
-                      include "include/php/main.php";
-                      if(login_by_session()['status'] == 1) {
-                        echo "<font color='green'>Już zalogowano!</font>";
-                        header("location: index.php");
-                      }
-                      if(isset($_POST['username']) && $_POST['username'] != null && isset($_POST['password']) && $_POST['password'] != null) {
-                        $user = login($_POST['username'], $_POST['password']);
-                        if(!$user['status']) {
-                          echo "<font color='red'>Podano złe dane!</font>";
-                        }
-                        else {
-                          echo "<font color='green'>Zalogowano!</font>";
-                          header("refresh:1;url=index.php");
-                        }
-                      }
-                    ?>
+                    <div id="message-box"></div>
                   </div>
                 </div>
               </div>
@@ -96,16 +79,37 @@
 <script src="js/sb-admin-2.min.js"></script>
 
 <script type="text/javascript">
-  $(function() {
-      $('#login_form').each(function() {
-          $(this).find('input').keypress(function(e) {
-              // Enter pressed?
-              if(e.which == 10 || e.which == 13) {
-                  $('#login_form').submit();
-              }
-          });
+  function login() {
+    var user = $('input[name=username]').val();
+    var pass = $('input[name=password]').val();
+    //alert('username: ' + user + ' pass: ' + pass);
+    $.ajax({
+        type: "POST",
+        url : "include/php/form_data.php?p=login",
+        dataType : "json",
+        data: {
+          username: user,
+          password: pass
+        }
 
-      });
+    })
+    .done(function(res) {
+      if(res['status'] != 0) {
+        window.setTimeout(function() {
+            window.location.href = 'index.html';
+        }, 2000);
+      }
+      $('#message-box').html(res['data']);
+    });
+  }
+  $(document).ready(function() {
+    $('#login_form').each(function() {
+        $(this).find('input').keypress(function(e) {
+            if(e.which == 10 || e.which == 13) {
+                login();
+            }
+        });
+    });
   });
 </script>
 
