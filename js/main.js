@@ -21,6 +21,15 @@ $(document).ready(function() {
     change_page();
 });
 function change_page(page) {
+    $.ajax({
+        url : "include/php/form_data.php?p=get_user_name",
+        dataType : "json"
+    })
+    .done(function(res) {
+        if(res['status'] == 0) {
+            window.location.href = 'login.html';
+        }
+    });
     $('#accordionSidebar li.active').removeClass('active');
     var page_name;
     switch (page) { 

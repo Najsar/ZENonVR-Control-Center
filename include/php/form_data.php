@@ -79,11 +79,11 @@ else {
             $data = $_POST['data'];
             $date = date('Y:m:d H:i:s');
             if($data[9] == 1) {
-                $query = sql_query("INSERT INTO sessions VALUES('','Przychód', '".$data[1]."', '".$data[3]."', '".$data[5]."', '".$data[2]."', '".$data[6]."', '".$data[7]."','".$data[8]."', '".$date."')");
+                $query = sql_query("INSERT INTO sessions VALUES(NULL,'Przychód', '".$data[1]."', '".$data[3]."', '".$data[5]."', '".$data[2]."', '".$data[6]."', '".$data[7]."','".$data[8]."', '".$date."')");
             }
             else {
                 for($i=0; $i<$data[9];$i++) {
-                    $query = sql_query("INSERT INTO sessions VALUES('','Przychód', '".$data[1]."', '".$data[3]."', '".$data[5]."', '".$data[2]."', '".($data[6]/$data[9])."', '".($data[7]/$data[9])."','".($data[8]/$data[9])."', '".$date."')");
+                    $query = sql_query("INSERT INTO sessions VALUES(NULL,'Przychód', '".$data[1]."', '".$data[3]."', '".$data[5]."', '".$data[2]."', '".($data[6]/$data[9])."', '".($data[7]/$data[9])."','".($data[8]/$data[9])."', '".$date."')");
                 }
             }
             if(!$query['status']) {
@@ -100,7 +100,7 @@ else {
         case "new_expense":
             $data = $_POST['data'];
             $date = date('Y:m:d H:i:s');
-            $query = sql_query("INSERT INTO sessions VALUES('','Rozchód', '".$data[0]."', '".$data[1]."', 'Gotówka', '-".$data[2]."', '-".$data[2]."', '-".$data[2]."','0', '".$date."')");
+            $query = sql_query("INSERT INTO sessions VALUES(NULL,'Rozchód', '".$data[0]."', '".$data[1]."', 'Gotówka', '-".$data[2]."', '-".$data[2]."', '-".$data[2]."','0', '".$date."')");
             if(!$query['status']) {
                 $json['status'] = "0";
                 $json['data'] = "Data not saved";
@@ -150,7 +150,7 @@ else {
             $sum['end_bal'] = $end_bal;
             $sum['date'] = date('Y:m:d H:i:s');
 
-            $query = sql_query("INSERT INTO reports VALUES('','".$sum['start_cash']."', '".$sum['cash']."', '".$sum['card']."', '".$sum['expense']."', '".$sum['pcstore']."', '".$sum['grupon']."', '".$sum['s_prezenty']."','".$sum['profit']."', '".$sum['partners']."', '".$sum['exchange']."', '".$sum['bonus']."', '".$sum['end_bal']."', '".$sum['date']."')");
+            $query = sql_query("INSERT INTO reports VALUES(NULL,'".$sum['start_cash']."', '".$sum['cash']."', '".$sum['card']."', '".$sum['expense']."', '".$sum['pcstore']."', '".$sum['grupon']."', '".$sum['s_prezenty']."','".$sum['profit']."', '".$sum['partners']."', '".$sum['exchange']."', '".$sum['bonus']."', '".$sum['end_bal']."', '".$sum['date']."')");
             if(!$query['status']) {
                 $json['status'] = "0";
                 $json['data'] = "Data not saved";

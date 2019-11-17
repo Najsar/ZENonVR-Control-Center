@@ -114,12 +114,19 @@
                 else {
                     $session = gen(1, 16);
                     $date = date('Y:m:d H:i:s');
-                    sql_query("INSERT INTO login_session VALUES ('', '".$user['data']['ID']."', '".$session."', '".$date."')");
-                    $return['status'] = 1;
-                    $return['data'] = $user['data'];
-                    $return['session'] = $session;
-                    $_SESSION['user_session'] = $session;
-                    return  $return;
+                    $insert_session = sql_query("INSERT INTO login_session VALUES (NULL, '".$user['data']['ID']."', '".$session."', '".$date."')");
+                    if($insert_session['status'] == 0) {
+                        $return['status'] = 0;
+                        $return['data'] = "Error: unable to insert data to database";
+                        return  $return;
+                    }
+                    else {
+                        $return['status'] = 1;
+                        $return['data'] = $user['data'];
+                        $return['session'] = $session;
+                        $_SESSION['user_session'] = $session;
+                        return  $return;
+                    }
                 }
             }
         }
