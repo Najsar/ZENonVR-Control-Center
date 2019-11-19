@@ -30,7 +30,8 @@ if($_GET['p'] == "login") {
     }
 }
 /*else if($_GET['p'] == "gen_pass") {
-    $pass_hashed = gen_pass($_POST['pass'], $_POST['salt']);
+    $json['salt'] = gen(1, 16);
+    $pass_hashed = gen_pass($_POST['pass'], $json['salt']);
     $json['status'] = 1;
     $json['data'] = $pass_hashed;
     echo json_encode( $json ) ;
@@ -131,7 +132,7 @@ else {
             echo json_encode( $json ) ;
         break;
         case "month_profit":
-            $query = sql_query("SELECT SUM(price) AS suma FROM sessions WHERE sort = 'Przychód' AND MONTH(time) = MONTH(NOW()) ORDER BY id DESC");
+            $query = sql_query("SELECT SUM(price) AS suma FROM sessions WHERE sort = 'Przychód' AND MONTH(time) = MONTH(NOW()) AND YEAR(time) = YEAR(NOW()) ORDER BY id DESC;");
             $data = $query['data']->fetch_all();
             $json['data'] = $data;
             echo json_encode( $json ) ;

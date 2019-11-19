@@ -166,7 +166,7 @@
         }
     }
     function get_stats($date) {
-        $query = sql_query("SELECT DATE(time), type, count(id), sum(price), category FROM sessions WHERE sort = 'Przychód' AND MONTH(time) = MONTH('".$date."') GROUP BY type, DATE(time) ORDER BY category");
+        $query = sql_query("SELECT DATE(time), type, count(id), sum(price), category FROM sessions WHERE sort = 'Przychód' AND MONTH(time) = MONTH('".$date."') AND YEAR(time) = YEAR('".$date."') GROUP BY type, DATE(time) ORDER BY category");
         $data = $query['data']->fetch_all();
     
         $days = [];
@@ -262,7 +262,7 @@
         return $thead.$tbody.$tfoot;
     }
     function get_sum($day) {
-        $query = sql_query("SELECT sort,category,type,payment,price,paid_price,exchange FROM sessions WHERE DAY(time) = DAY('".$day."') ORDER BY id DESC");
+        $query = sql_query("SELECT sort,category,type,payment,price,paid_price,exchange FROM sessions WHERE DATE(time) = DATE('".$day."') ORDER BY id DESC");
         $data = $query['data']->fetch_all();
         $start_cash = sql_main("SELECT end_balance FROM reports ORDER BY id DESC LIMIT 1");
         $sum = [];
