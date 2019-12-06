@@ -39,13 +39,13 @@ if($_GET['p'] == "login") {
 else if($_GET['p'] == "check_user") {
     $data = login($_POST['user'], $_POST['pass']);
     echo json_encode( $data ) ;
-}*/
+}
 else if(login_by_session()['status'] != 1) {
     $json['status'] = 0;
     $json['err_code'] = 1;
     $json['err_message'] = 'User not login';
     echo json_encode( $json );
-}
+}*/
 else {
     switch($_GET['p']) {
         case "get_user_name":
